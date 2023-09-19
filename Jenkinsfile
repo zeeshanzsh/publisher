@@ -24,13 +24,12 @@ pipeline {
             steps{
                 script{
 
-                withDockerRegistry(credentialsId: 'docker-hub-new') {
-                                    sh "docker images"
-                                    sh "docker push zohanizna/publisher"
-                 }
-                withEnv(['docker_hub="ZohanIzna&1617"']) {
-                 sh "docker login -u zohanizna -p $docker_hub"
+               withCredentials([string(credentialsId: 'dockerhub-password', variable: 'docker-hub-creds')]) {
+                   sh "docker login -u zohanizna -p ${docker-hub-creds}"
                }
+//                 withEnv(['docker_hub="ZohanIzna&1617"']) {
+//                  sh "docker login -u zohanizna -p $docker_hub"
+//                }
                   sh 'docker push zohanizna/publisher'
                 }
             }
