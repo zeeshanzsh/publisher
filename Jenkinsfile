@@ -17,9 +17,11 @@ pipeline {
         stage('Push Image to Docker-Hub'){
             steps{
                 script{
-                withCredentials([string(credentialsId: 'docker-hubpwd', variable: 'docker-hub-pwd')]) {
-                    sh 'docker login -u zohanizna -p ${docker-pwd}'
+
+                withCredentials([string(credentialsId: 'gold_hub', variable: 'Docker-Hub')]) {
+                  sh 'docker login -u zohanizna -p ${Docker-Hub}'
                 }
+
 
                   sh 'docker push zeeshan/publisher'
                 }
