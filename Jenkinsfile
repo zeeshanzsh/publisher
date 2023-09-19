@@ -24,7 +24,7 @@ pipeline {
             steps{
                 script{
                     withEnv(['docker_hub="ZohanIzna&1617"']) {
-                       sh "docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD"
+                        sh 'docker login -u $DOCKER_HUB_USERNAME --password-stdin < $DOCKER_HUB_PASSWORD'
                 }
                   sh 'docker push zohanizna/publisher'
                 }
