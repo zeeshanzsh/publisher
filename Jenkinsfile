@@ -10,20 +10,17 @@ pipeline {
         stage('Docker build image'){
             steps{
                 script{
-                    sh 'docker build -t zeeshan/publisher .'
+                    sh 'docker build -t zohanizna/publisher .'
                 }
             }
         }
         stage('Push Image to Docker-Hub'){
             steps{
                 script{
-        withEnv(['docker_hub="ZohanIzna&1617"']) {
-                sh "docker login -u zohanizna -p $docker_hub"
+                    withEnv(['docker_hub="ZohanIzna&1617"']) {
+                        sh "docker login -u zohanizna -p $docker_hub"
                 }
-
-
-
-                  sh 'docker push zeeshan/publisher'
+                  sh 'docker push zohanizna/publisher'
                 }
             }
         }
