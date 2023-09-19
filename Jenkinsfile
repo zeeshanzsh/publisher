@@ -1,5 +1,11 @@
 pipeline {
     agent any
+
+    environment {
+            // Define environment variables for Docker Hub credentials
+            DOCKER_HUB_USERNAME = credentials('dockerhub-username')
+            DOCKER_HUB_PASSWORD = credentials('dockerhub-password')
+     }
     stages {
         stage('Build project') {
             steps {
@@ -18,7 +24,7 @@ pipeline {
             steps{
                 script{
                     withEnv(['docker_hub="ZohanIzna&1617"']) {
-                        sh "docker login -u zohanizna -p $docker_hub"
+                       sh "docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD"
                 }
                   sh 'docker push zohanizna/publisher'
                 }
