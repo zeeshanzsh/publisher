@@ -1,6 +1,6 @@
 # publisher Service
 
-Publisher code with REST Endpoint with Jenkins pipeline
+Publisher code with REST Endpoint with Jenkins CI pipeline
 
 ***Jenkins steps:***
 ```
