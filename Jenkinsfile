@@ -1,11 +1,5 @@
 pipeline {
     agent any
-
-    environment {
-            // Define environment variables for Docker Hub credentials
-            DOCKER_HUB_USERNAME = credentials('dockerhub-username')
-            DOCKER_HUB_PASSWORD = credentials('dockerhub-password')
-     }
     stages {
         stage('Build project') {
             steps {
@@ -23,14 +17,11 @@ pipeline {
         stage('Push Image to Docker-Hub'){
             steps{
                 script{
-
+                // Load docker hub creds from secret Text
                 withCredentials([string(credentialsId: 'dockerCreds', variable: 'dockerCreds')]) {
                          sh "docker login -u zohanizna -p $dockerCreds"
                 }
-
-//                 withEnv(['docker_hub="ZohanIzna&1617"']) {
-//                  sh "docker login -u zohanizna -p $docker_hub"
-//                }
+                // Block to push to docker-hub
                   sh 'docker push zohanizna/publisher'
                 }
             }
