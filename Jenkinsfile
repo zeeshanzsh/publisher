@@ -24,9 +24,8 @@ pipeline {
             steps{
                 script{
 
-                withCredentials([string(credentialsId: 'creds_docker_hub', variable: 'docker_creds')]) {
-
-                    sh "docker login -u zohanizna -p $docker_creds"
+                withCredentials([string(credentialsId: 'dockerCreds', variable: 'dockerCreds')]) {
+                         sh "docker login -u zohanizna -p $dockerCreds"
                 }
 
 //                 withEnv(['docker_hub="ZohanIzna&1617"']) {
