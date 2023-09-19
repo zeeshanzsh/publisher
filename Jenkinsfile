@@ -23,13 +23,9 @@ pipeline {
         stage('Push Image to Docker-Hub'){
             steps{
                 script{
-
-                 withDockerRegistry(credentialsId: 'docker-hub-new') {
-                                    sh "docker push zohanizna/publisher"
-                                    }
-//                       withEnv(['docker_hub="ZohanIzna&1617"']) {
-//                                    sh "docker login -u zohanizna -p $docker_hub"
-             //   }
+                withEnv(['docker_hub="ZohanIzna&1617"']) {
+                                   sh "docker login -u zohanizna -p $docker_hub"
+               }
                   sh 'docker push zohanizna/publisher'
                 }
             }
